@@ -82,7 +82,7 @@
                     android:paddingRight="30dp">
 
                     <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_tab"
+                        android:id="@+id/rv_indicator"
                         android:layout_width="match_parent"
                         android:layout_height="34dp"
                         android:layout_centerVertical="true"
@@ -94,12 +94,13 @@
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_main_content"
+                android:id="@+id/rv_content"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="20dp"
+                android:layoutAnimation="@anim/rv_fadein_animation"
                 android:visibility="visible" />
 
         </com.hbandroid.sliderefreshdemo.view.StickyNavLayout>

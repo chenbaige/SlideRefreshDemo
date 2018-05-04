@@ -13,8 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 
-import com.hbandroid.twothewin.R;
-
+import com.hbandroid.sliderefreshdemo.R;
 
 public class StickyNavLayout extends LinearLayout {
     private static final String TAG = "StickyNavLayout";
@@ -104,7 +103,7 @@ public class StickyNavLayout extends LinearLayout {
         super.onFinishInflate();
         mTop = findViewById(R.id.header);
         mNav = findViewById(R.id.snlIindicator);
-        mRecycleView = (RecyclerView) findViewById(R.id.rv_main_content);
+        mRecycleView = (RecyclerView) findViewById(R.id.rv_content);
     }
 
 
@@ -189,12 +188,10 @@ public class StickyNavLayout extends LinearLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 float dy = y - mLastY;
-                System.out.println("分发事件");
 
                 //header隐藏并且向上滑动
                 if (!isInControl && android.support.v4.view.ViewCompat.canScrollVertically(mRecycleView, -1) && isTopHidden
                         && dy > 0) {
-                    System.out.println("分发滑动事件");
                     isInControl = true;
                     ev.setAction(MotionEvent.ACTION_CANCEL);
                     MotionEvent ev2 = MotionEvent.obtain(ev);
@@ -231,7 +228,6 @@ public class StickyNavLayout extends LinearLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 float dy = y - mLastY;
-                System.out.println("判断是否拦截" + isTopHidden + ",dy" + dy + ",flag" + android.support.v4.view.ViewCompat.canScrollVertically(mRecycleView, -1));
                 if (Math.abs(dy) > mTouchSlop) {
                     mDragging = true;
                     //header没有隐藏或者header隐藏并且向下滑动
@@ -239,7 +235,6 @@ public class StickyNavLayout extends LinearLayout {
                         initVelocityTrackerIfNotExists();
                         mVelocityTracker.addMovement(ev);
                         mLastY = y;
-                        System.out.println("拦截move事件");
                         return true;
                     }
                 }
@@ -267,7 +262,6 @@ public class StickyNavLayout extends LinearLayout {
                 mLastY = y;
                 return true;
             case MotionEvent.ACTION_MOVE:
-                System.out.println("进入touch-move事件");
                 if (isScroll) {
                     float dy = y - mLastY;
 
@@ -281,10 +275,8 @@ public class StickyNavLayout extends LinearLayout {
                             event.setAction(MotionEvent.ACTION_DOWN);
                             dispatchTouchEvent(event);
                             isInControl = false;
-                            System.out.println("向上滑动");
                             return true;
                         } else {
-                            System.out.println("没有隐藏header");
                             isSticky = false;
                         }
                     }
@@ -308,7 +300,6 @@ public class StickyNavLayout extends LinearLayout {
                 recycleVelocityTracker();
                 break;
         }
-        System.out.println("处理touch事件:" + action);
         return super.onTouchEvent(event);
     }
 
