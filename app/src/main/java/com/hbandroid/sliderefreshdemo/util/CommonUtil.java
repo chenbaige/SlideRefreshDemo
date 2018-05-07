@@ -1,5 +1,12 @@
 package com.hbandroid.sliderefreshdemo.util;
 
+import android.content.Context;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
+import com.hbandroid.sliderefreshdemo.R;
+import com.joooonho.SelectableRoundedImageView;
+
 /**
  * Title:SlideRefreshDemo
  * <p>
@@ -15,24 +22,24 @@ public class CommonUtil {
 
     private static CommonUtil mInstance = null;
 
-        public static CommonUtil getInstance() {
-            if (null == mInstance) {
-                synchronized (CommonUtil.class) {
-                    if (null == mInstance) {
-                        mInstance = new CommonUtil();
-                    }
+    public static CommonUtil getInstance() {
+        if (null == mInstance) {
+            synchronized (CommonUtil.class) {
+                if (null == mInstance) {
+                    mInstance = new CommonUtil();
                 }
             }
-            return mInstance;
         }
+        return mInstance;
+    }
 
     // 实现TypeEvaluator接口
 
     private int mCurrentRed;
 
-    private int mCurrentGreen ;
+    private int mCurrentGreen;
 
-    private int mCurrentBlue ;
+    private int mCurrentBlue;
 
     // 复写evaluate（）
     // 在evaluate（）里写入对象动画过渡的逻辑:此处是写颜色过渡的逻辑
@@ -68,18 +75,23 @@ public class CommonUtil {
         if (mCurrentRed != endRed) {
             mCurrentRed = getCurrentColor(startRed, endRed, colorDiff, 0,
                     fraction);
+            System.out.println("currentRed:" + mCurrentRed);
             // getCurrentColor()决定如何根据差值来决定颜色变化的快慢 ->>关注1
-        } else if (mCurrentGreen != endGreen) {
+        }
+        if (mCurrentGreen != endGreen) {
             mCurrentGreen = getCurrentColor(startGreen, endGreen, colorDiff,
                     redDiff, fraction);
-        } else if (mCurrentBlue != endBlue) {
+            System.out.println("mCurrentGreen:" + mCurrentGreen);
+        }
+        if (mCurrentBlue != endBlue) {
             mCurrentBlue = getCurrentColor(startBlue, endBlue, colorDiff,
                     redDiff + greenDiff, fraction);
+            System.out.println("mCurrentBlue:" + mCurrentBlue);
         }
         // 将计算出的当前颜色的值组装返回
         String currentColor = "#" + getHexString(mCurrentRed)
                 + getHexString(mCurrentGreen) + getHexString(mCurrentBlue);
-
+        System.out.println("currentColor:" + currentColor);
         // 由于我们计算出的颜色是十进制数字，所以需要转换成十六进制字符串:调用getHexString()->>关注2
         // 最终将RGB颜色拼装起来,并作为最终的结果返回
         return currentColor;
@@ -92,12 +104,12 @@ public class CommonUtil {
                                 int offset, float fraction) {
         int currentColor;
         if (startColor > endColor) {
-            currentColor = (int) (startColor - (fraction * colorDiff - offset));
+            currentColor = (int) (startColor - (fraction * (colorDiff - offset)));
             if (currentColor < endColor) {
                 currentColor = endColor;
             }
         } else {
-            currentColor = (int) (startColor + (fraction * colorDiff - offset));
+            currentColor = (int) (startColor + (fraction * (colorDiff - offset)));
             if (currentColor > endColor) {
                 currentColor = endColor;
             }
@@ -114,5 +126,27 @@ public class CommonUtil {
         return hexString;
     }
 
+
+    /**
+     * 加载网络图片
+     */
+    public static void LoadUrlImage(Context context, String url, ImageView imageView){
+        Glide.with(context)
+                .load(url)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .into(imageView);
+    }
+
+    /**
+     * 加载网络图片
+     */
+    public static void LoadUrlImage(Context context,String url,SelectableRoundedImageView imageView){
+        Glide.with(context)
+                .load(url)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.mipmap.ic_launcher)
+                .into(imageView);
+    }
 
 }

@@ -111,12 +111,7 @@ public class MainActivity extends AppCompatActivity implements StickyNavLayout.O
 
     @Override
     public void scrollPercent(float percent) {
-        if (percent == 1) {
-            snlIindicator.setBackgroundColor(Color.parseColor("#3F51B5"));
-        } else {
-            snlIindicator.setBackgroundColor(Color.parseColor((String) CommonUtil.getInstance().evaluate(percent, "#e18e36", "#3F51B5")));
-        }
-        System.out.println("当前颜色:" + CommonUtil.getInstance().evaluate(percent, "#e18e36", "#3F51B5"));
+        snlIindicator.setBackgroundColor(Color.parseColor((String) CommonUtil.getInstance().evaluate(percent, "#e18e36", "#3F51B5")));
         if (percent == 0) {
             swipeLayout.setEnabled(true);
             swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

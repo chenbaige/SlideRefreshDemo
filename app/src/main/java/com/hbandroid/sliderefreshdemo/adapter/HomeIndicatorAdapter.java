@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.hbandroid.sliderefreshdemo.R;
+import com.hbandroid.sliderefreshdemo.util.CommonUtil;
 import com.hbandroid.sliderefreshdemo.util.GlideImageLoader;
 import com.joooonho.SelectableRoundedImageView;
 
@@ -45,7 +46,7 @@ public class HomeIndicatorAdapter extends RecyclerView.Adapter<HomeIndicatorAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        GlideImageLoader.LoadUrlImage(mContext, mList.get(position), holder.mImgView);
+        CommonUtil.LoadUrlImage(mContext, mList.get(position), holder.mImgView);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class HomeIndicatorAdapter extends RecyclerView.Adapter<HomeIndicatorAdap
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        SelectableRoundedImageView mImgView;
+        ImageView mImgView;
 
         public ViewHolder(View itemView) {
             super(itemView);

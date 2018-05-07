@@ -20,25 +20,4 @@ public class GlideImageLoader extends ImageLoader {
 //        ImageUtils.downloadHomeTopDrawable(context.getApplicationContext(),(String)path,imageView);
     }
 
-    /**
-     * 加载网络图片
-     */
-    public static void LoadUrlImage(Context context,String url,ImageView imageView){
-        Glide.with(context)
-                .load(url)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
-                .into(imageView);
-    }
-
-    /**
-     * 加载网络图片
-     */
-    public static void LoadUrlImage(Context context,String url,SelectableRoundedImageView imageView){
-        Glide.with(context)
-                .load(url)
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
-                .into(imageView);
-    }
 }
